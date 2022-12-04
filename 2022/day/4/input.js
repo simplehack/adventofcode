@@ -6,7 +6,7 @@ const input = fs
 	.toString()
 	.trim()
 	.split('\n')
-	.map(item => item.split(','));
+	.map(item => item);
 
 module.exports = {
 	input,
