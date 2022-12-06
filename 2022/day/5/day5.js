@@ -1,4 +1,3 @@
- // VPCDMSLWJ
 const { stacks, moves } = require('./input');
 
 const part1_stacks = [...stacks];
@@ -14,7 +13,6 @@ const part1_top = part1_stacks.map((s) => {
 });
 console.log(part1_top.join(''))
 
-// TPWCGNCCG
 const part2_stacks = [...stacks];
 moves.forEach((move, index) => {
     let [count, from, to] = move;
