@@ -1,4 +1,3 @@
-const { allowedNodeEnvironmentFlags } = require('process');
 const { input } = require('./input');
 const sum = (arr) => arr.reduce((sum, val) => sum + val);
 
