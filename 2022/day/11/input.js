@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 
 const input = fs
-	.readFileSync(path.join(__dirname, 'input.test'))
+	.readFileSync(path.join(__dirname, 'input.txt'))
 	.toString()
 	.trim()
 	.split('\n\n')
@@ -33,6 +33,7 @@ const input = fs
 		if (test[0] === 'divisible') {
 			testFn = (n) => Math.abs(n % test[1]) == 0 ? is_true : is_false
 		}
+		monkey.testval = test[1];
 		monkey.test = testFn;
 		return monkey;
 	})

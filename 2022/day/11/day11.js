@@ -1,7 +1,7 @@
-const { inspect } = require('util');
 const { input } = require('./input');
-let debug
-const monkeyBusiness = (monkies, rounds, worryfactor) => {
+const sort = (o) => o.sort((a,b)=>b-a);
+
+const monkeyBusiness = (monkies, rounds, worryFn) => {
     let inspected = monkies.map(m=>0);
     let m_items = monkies.map(monkey => [...monkey.items]);
     for (let i = 0; i < rounds; i++) {
@@ -9,9 +9,7 @@ const monkeyBusiness = (monkies, rounds, worryfactor) => {
             let {op, test} = monkies[j];
             while(m_items[j].length) {
                 let item = m_items[j].shift();
-                if (debug) console.log(j, item, op(item));
-                let new_worry = Math.floor(op(item) / worryfactor);
-                let next_monkey = test(new_worry);
+                let next_monkey = test(worryFn(item, op));
                 m_items[next_monkey].push(new_worry)
                 inspected[j]++;
             }
@@ -19,9 +17,13 @@ const monkeyBusiness = (monkies, rounds, worryfactor) => {
     }
     return inspected;
 };
-const sort = (o) => o.sort((a,b) => b-a);
 
-p1 = monkeyBusiness(input, 20, 3);
-p1_sorted = sort(p1);
-console.log('p1', p1_sorted[0] * p1_sorted[1]);
+p1 = sort(monkeyBusiness(input, 20, (i, o) => Math.floor(o(i)/3)));
+console.log('p1', p1, p1[0] * p1[1]);
 
+p2 = sort(
+    monkeyBusiness(input, 10000, (i, opFn) => {
+        opFn(i) % input.map((m)=>m.testval).reduce((a,b)=>a*b, 1)
+    });
+);
+console.log('p2', p2, p2[0] * p2[1]);
