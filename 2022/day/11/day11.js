@@ -19,7 +19,7 @@ const monkeyBusiness = (monkies, rounds, worryFn) => {
     return inspected;
 };
 
-p1 = sort(monkeyBusiness(input, 20, (i, o) => Math.floor(o(i)/3)));
+p1 = sort(monkeyBusiness(input, 20, (i, opFn) => Math.floor(opFn(i)/3)));
 console.log('p1', p1, p1[0] * p1[1]);
 
 p2 = sort(monkeyBusiness(input, 10000, (i, opFn) => {
