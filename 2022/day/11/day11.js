@@ -9,7 +9,8 @@ const monkeyBusiness = (monkies, rounds, worryFn) => {
             let {op, test} = monkies[j];
             while(m_items[j].length) {
                 let item = m_items[j].shift();
-                let next_monkey = test(worryFn(item, op));
+                let new_worry = worryFn(item, op)
+                let next_monkey = test(new_worry);
                 m_items[next_monkey].push(new_worry)
                 inspected[j]++;
             }
@@ -21,9 +22,7 @@ const monkeyBusiness = (monkies, rounds, worryFn) => {
 p1 = sort(monkeyBusiness(input, 20, (i, o) => Math.floor(o(i)/3)));
 console.log('p1', p1, p1[0] * p1[1]);
 
-p2 = sort(
-    monkeyBusiness(input, 10000, (i, opFn) => {
-        opFn(i) % input.map((m)=>m.testval).reduce((a,b)=>a*b, 1)
-    });
-);
+p2 = sort(monkeyBusiness(input, 10000, (i, opFn) => {
+    return opFn(i) % input.map((m)=>m.testval).reduce((a,b)=>a*b, 1);
+}));
 console.log('p2', p2, p2[0] * p2[1]);
